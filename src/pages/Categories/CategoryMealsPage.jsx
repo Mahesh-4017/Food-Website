@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import MealCard from "@/components/Mealcard";
+import MealCard from "@/components/MealCard";
 import { getMealsByCategory } from "@/services/mealApi";
 import Breadcrumbs from "@/components/Breadcrumbs";
 

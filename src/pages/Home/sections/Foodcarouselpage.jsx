@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import MealCard from "@/components/Mealcard";
+import MealCard from "@/components/MealCard";
 import { useNavigate } from "react-router-dom";
 
 const LETTERS = ["a", "b", "c", "d", "e", "f", "g", "h"];
