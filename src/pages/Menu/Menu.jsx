@@ -923,7 +923,6 @@ const Menu = () => {
       justifyContent: "center",
       gap: 2,
       boxShadow: "0 8px 200px rgba(232,145,58,0.35)",
-      position: "fixed",
     }}
   >
     <span style={{ fontSize: 22, lineHeight: 1 }}><img width={28} height={25} src="/grocery-cart.png" alt="cart" /></span>
