@@ -24,7 +24,7 @@ A cinematic food website built with **React + Vite + Framer Motion**.
 ## 🚀 Getting Started
 
 ```bash
-cd FoodWebsite
+cd Food-Website
 npm install
 npm run dev
 ```
@@ -36,6 +36,7 @@ Open http://localhost:5173
 - `react` + `react-dom` — UI framework
 - `framer-motion` — All animations (intro, scroll, hover, transitions)
 - `vite` — Build tool
+- `tailwindcss` — Styling
 
 ## 🎨 Design System
 
@@ -54,7 +55,7 @@ src/
     IntroAnimation.jsx             — Cinematic intro sequence
     Navbar.jsx                     — Sticky nav with scroll effects
     Hero.jsx                       — Full-screen hero with parallax
-    FeaturedDishes.jsx             — 3 signature dish cards
+    FeaturedDishes.jsx             —  signature dish cards
     AboutSection.jsx               — Story + stats split layout
     MenuSection.jsx                — Full à la carte with tab switching
     TestimonialsSection.jsx        — Press quotes + footer
