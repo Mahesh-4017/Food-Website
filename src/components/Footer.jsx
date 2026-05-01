@@ -421,6 +421,7 @@ function Newsletter() {
 function FooterMain() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
+  
 
   return (
     <footer
