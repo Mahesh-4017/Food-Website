@@ -11,6 +11,12 @@ export const searchMealByName = async (name) => {
     return data.meals;
 };
 
+export const searchCocktailByName = async (name) => {
+    const res = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${name}`);
+    const data = await res.json();
+    return data.drinks;
+};
+
 export default function SearchPage() {
     const [query, setQuery] = useState("");
     const [meals, setMeals] = useState([]);
@@ -24,16 +30,32 @@ export default function SearchPage() {
 
         setLoading(true);
         setSuggestions([]);
-
         try {
-            const results = await searchMealByName(query);
-            setMeals(results || []);
+            const mealResults = await searchMealByName(query);
+            const cocktailResults = await searchCocktailByName(query);
+
+            const formattedCocktails = (cocktailResults || []).map((drink) => ({
+                idMeal: drink.idDrink,
+                strMeal: drink.strDrink,
+                strMealThumb: drink.strDrinkThumb,
+                isCocktail: true,
+            }));
+
+            const combinedResults = [
+                ...(mealResults || []),
+                ...formattedCocktails,
+            ];
+
+            setMeals(combinedResults);
         } catch (error) {
             console.error("Search failed", error);
         } finally {
             setLoading(false);
         }
+
+
     };
+
 
     return (
         <motion.div
@@ -86,8 +108,22 @@ export default function SearchPage() {
                             setQuery(value);
 
                             if (value.trim().length > 0) {
-                                const results = await searchMealByName(value);
-                                setSuggestions(results?.slice(0, 5) || []);
+                                const mealResults = await searchMealByName(value);
+                                const cocktailResults = await searchCocktailByName(value);
+
+                                const formattedCocktails = (cocktailResults || []).map((drink) => ({
+                                    idMeal: drink.idDrink,
+                                    strMeal: drink.strDrink,
+                                    strMealThumb: drink.strDrinkThumb,
+                                    isCocktail: true,
+                                }));
+
+                                const combinedSuggestions = [
+                                    ...(mealResults || []),
+                                    ...formattedCocktails,
+                                ];
+
+                                setSuggestions(combinedSuggestions.slice(0, 5));
                             } else {
                                 setSuggestions([]);
                             }
@@ -158,7 +194,7 @@ export default function SearchPage() {
 
                 {/* Results */}
                 {loading ? (
-                    <p style={{ color: "#777" }}>Loading meals...</p>
+                    <p style={{ color: "#777" }}>Searching for recipes and cocktails...</p>
                 ) : (
                     <div
                         style={{
@@ -171,7 +207,13 @@ export default function SearchPage() {
                             <MealCard
                                 key={meal.idMeal}
                                 meal={meal}
-                                onClick={() => navigate(`/meal/${meal.idMeal}`)}
+                                onClick={() => {
+                                    if (meal.isCocktail) {
+                                        navigate(`/cocktail/${meal.idMeal}`);
+                                    } else {
+                                        navigate(`/meal/${meal.idMeal}`);
+                                    }
+                                }}
                             />
                         ))}
                     </div>
@@ -185,7 +227,7 @@ export default function SearchPage() {
                             fontFamily: "serif",
                         }}
                     >
-                        No meals found.
+                        No recipes or cocktails found.
                     </p>
                 )}
             </div>

@@ -17,6 +17,10 @@ import CountriesPage from "./pages/Country/CountriesPage";
 import CountriesMealspage from "./pages/Country/CountriesMealspage";
 import Book from "./pages/BookTable/Book";
 import Menu from "./pages/Menu/Menu";
+import Private from "./pages/PrivateDinner/Private";
+import HomeCocktail from "./pages/Cocktails/Home/home";
+import CocktailDetails from "./pages/Cocktails/CocktailDetails/CocktailDetails";
+import Latest from "./pages/Cocktails/Cocktail/Cocktail";
 
 
 
@@ -53,6 +57,10 @@ export default function App() {
         <Route path="/country/:name" element={<CountriesMealspage />} />
         <Route path="/book" element={<Book />} />
         <Route path="/menu" element={<Menu />} />
+        <Route path="/private" element={<Private />} />
+        <Route path="/home" element={<HomeCocktail />} />
+        <Route path="/cocktail/:id" element={<CocktailDetails />} />
+        <Route path="/cocktail" element={<Latest />} />
       </Routes>
 
       <Footer />
