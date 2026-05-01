@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [openMenu, setOpenMenu] = useState(null);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -12,14 +13,6 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const getDropdownPosition = () => {
-    if (typeof window === "undefined") return { left: 0 };
-    const width = window.innerWidth;
-    // center dropdown safely inside screen
-    if (width < 500) return { left: "50%", transform: "translateX(-50%)" };
-    return { left: -40, transform: "none" };
-  };
 
   const menu = {
     Meals: [
@@ -61,7 +54,7 @@ export default function Navbar() {
         left: 0,
         right: 0,
         zIndex: 100,
-        padding: scrolled ? "14px 40px" : "28px 40px",
+        padding: scrolled ? "14px 20px" : "24px 20px",
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
@@ -70,7 +63,6 @@ export default function Navbar() {
         borderBottom: scrolled
           ? "1px solid rgba(232,145,58,0.15)"
           : "1px solid transparent",
-        transition: "all 0.3s ease",
       }}
     >
       {/* LOGO */}
@@ -81,6 +73,7 @@ export default function Navbar() {
           fontSize: 22,
           fontWeight: 700,
           cursor: "pointer",
+          zIndex: 200,
         }}
       >
         <span style={{ color: "#f5efe6" }}>LU</span>
@@ -88,8 +81,14 @@ export default function Navbar() {
         <span style={{ color: "#f5efe6" }}>NE</span>
       </div>
 
-      {/* MENU */}
-      <div style={{ display: "flex", gap: 26, alignItems: "center" }}>
+      {/* DESKTOP MENU */}
+      <div
+        className="hidden md:flex"
+        style={{
+          gap: 26,
+          alignItems: "center",
+        }}
+      >
         {Object.keys(menu).map((key) => (
           <div
             key={key}
@@ -97,10 +96,8 @@ export default function Navbar() {
             onMouseEnter={() => setOpenMenu(key)}
             onMouseLeave={() => setOpenMenu(null)}
           >
-            {/* MAIN ITEM */}
             <span
               style={{
-                fontFamily: "'Cormorant Garamond', serif",
                 fontSize: 13,
                 letterSpacing: "0.15em",
                 textTransform: "uppercase",
@@ -111,27 +108,21 @@ export default function Navbar() {
               {key}
             </span>
 
-            {/* DROPDOWN */}
             <AnimatePresence>
               {openMenu === key && (
                 <motion.div
-                  initial={{ opacity: 0, y: 10, scale: 0.98 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: 10, scale: 0.98 }}
-                  transition={{ duration: 0.2 }}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 10 }}
                   style={{
                     position: "absolute",
-                    top: "38px",
-                    ...getDropdownPosition(),
+                    top: 38,
+                    left: -40,
                     background: "rgba(15,12,8,0.98)",
                     border: "1px solid rgba(232,145,58,0.2)",
                     borderRadius: 14,
-                    padding: "10px",
-                    backdropFilter: "blur(14px)",
-                    boxShadow: "0 20px 50px rgba(0,0,0,0.5)",
-                    maxWidth: "90vw",
-                    minWidth: 150,
-                    whiteSpace: "nowrap",
+                    padding: 10,
+                    minWidth: 180,
                   }}
                 >
                   {menu[key].map((item) => (
@@ -141,19 +132,10 @@ export default function Navbar() {
                       style={{
                         display: "block",
                         padding: "10px 12px",
-                        fontSize: 13,
                         color: "#f5efe6",
                         textDecoration: "none",
-                        borderRadius: 10,
-                        transition: "0.2s",
+                        borderRadius: 8,
                       }}
-                      onMouseOver={(e) =>
-                        (e.currentTarget.style.background =
-                          "rgba(232,145,58,0.12)")
-                      }
-                      onMouseOut={(e) =>
-                        (e.currentTarget.style.background = "transparent")
-                      }
                     >
                       {item.name}
                     </Link>
@@ -164,6 +146,100 @@ export default function Navbar() {
           </div>
         ))}
       </div>
+
+      {/* MOBILE BUTTON */}
+      <div
+        onClick={() => setMobileOpen(!mobileOpen)}
+        className="block md:hidden"
+        style={{
+          flexDirection: "column",
+          gap: 4,
+          cursor: "pointer",
+          zIndex: 200,
+        }}
+      >
+        <span
+          style={{
+            width: 24,
+            height: 2,
+            background: "#fff",
+          }}
+        />
+        <span
+          style={{
+            width: 24,
+            height: 2,
+            background: "#fff",
+          }}
+        />
+        <span
+          style={{
+            width: 24,
+            height: 2,
+            background: "#fff",
+          }}
+        />
+      </div>
+
+      {/* MOBILE MENU */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            initial={{ opacity: 0, x: "100%" }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: "100%" }}
+            transition={{ duration: 0.3 }}
+            style={{
+              position: "fixed",
+              top: 0,
+              right: 0,
+              width: "85%",
+              maxWidth: 350,
+              height: "100vh",
+              background: "#0a0804",
+              padding: "100px 30px",
+              display: "flex",
+              flexDirection: "column",
+              gap: 30,
+              zIndex: 150,
+              overflowY: "auto",
+            }}
+          >
+            {Object.keys(menu).map((section) => (
+              <div key={section}>
+                <h3
+                  style={{
+                    color: "#e8913a",
+                    marginBottom: 12,
+                    fontSize: 14,
+                    textTransform: "uppercase",
+                    letterSpacing: 2,
+                  }}
+                >
+                  {section}
+                </h3>
+
+                {menu[section].map((item) => (
+                  <Link
+                    key={item.name}
+                    to={item.path}
+                    onClick={() => setMobileOpen(false)}
+                    style={{
+                      display: "block",
+                      color: "#fff",
+                      textDecoration: "none",
+                      padding: "10px 0",
+                      fontSize: 15,
+                    }}
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+              </div>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.nav>
   );
 }
