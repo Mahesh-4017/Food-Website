@@ -21,6 +21,7 @@ import Private from "./pages/PrivateDinner/Private";
 import HomeCocktail from "./pages/Cocktails/Home/home";
 import CocktailDetails from "./pages/Cocktails/CocktailDetails/CocktailDetails";
 import Latest from "./pages/Cocktails/Cocktail/Cocktail";
+import NotFound from "./pages/NotFound/NotFound";
 
 
 
@@ -61,6 +62,7 @@ export default function App() {
         <Route path="/home" element={<HomeCocktail />} />
         <Route path="/cocktail/:id" element={<CocktailDetails />} />
         <Route path="/cocktail" element={<Latest />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
 
       <Footer />

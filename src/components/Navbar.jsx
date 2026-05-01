@@ -13,21 +13,40 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const getDropdownPosition = () => {
+    if (typeof window === "undefined") return { left: 0 };
+    const width = window.innerWidth;
+    // center dropdown safely inside screen
+    if (width < 500) return { left: "50%", transform: "translateX(-50%)" };
+    return { left: -40, transform: "none" };
+  };
+
   const menu = {
     Meals: [
-      { name: "Home Meals", path: "/" },
+      { name: "Home", path: "/" },
       { name: "Categories", path: "/categories" },
+      { name: "Category Page", path: "/category" },
       { name: "World Cuisine", path: "/country" },
       { name: "Trending Meals", path: "/trending" },
+      { name: "Random Meal", path: "/random" },
     ],
+
     Cocktails: [
       { name: "Cocktail Home", path: "/home" },
       { name: "Latest Cocktails", path: "/cocktail" },
+      { name: "Cocktail Details", path: "/cocktail/11007" },
       { name: "Random Cocktail", path: "/random" },
     ],
-    Tools: [
+
+    Search: [
       { name: "Search Meals", path: "/search" },
-      { name: "Search Cocktails", path: "/cocktail-search" },
+      { name: "Search Cocktails", path: "/search" },
+    ],
+
+    Booking: [
+      { name: "Book Table", path: "/book" },
+      { name: "Menu", path: "/menu" },
+      { name: "Private Dining", path: "/private" },
     ],
   };
 
@@ -47,7 +66,7 @@ export default function Navbar() {
         justifyContent: "space-between",
         alignItems: "center",
         background: scrolled ? "rgba(10,8,4,0.92)" : "transparent",
-        backdropFilter: scrolled ? "blur(12px)" : "none",
+        backdropFilter: scrolled ? "blur(11px)" : "none",
         borderBottom: scrolled
           ? "1px solid rgba(232,145,58,0.15)"
           : "1px solid transparent",
@@ -70,7 +89,7 @@ export default function Navbar() {
       </div>
 
       {/* MENU */}
-      <div style={{ display: "flex", gap: 28, alignItems: "center" }}>
+      <div style={{ display: "flex", gap: 26, alignItems: "center" }}>
         {Object.keys(menu).map((key) => (
           <div
             key={key}
@@ -78,7 +97,7 @@ export default function Navbar() {
             onMouseEnter={() => setOpenMenu(key)}
             onMouseLeave={() => setOpenMenu(null)}
           >
-            {/* Main Button */}
+            {/* MAIN ITEM */}
             <span
               style={{
                 fontFamily: "'Cormorant Garamond', serif",
@@ -92,24 +111,27 @@ export default function Navbar() {
               {key}
             </span>
 
-            {/* Dropdown */}
+            {/* DROPDOWN */}
             <AnimatePresence>
               {openMenu === key && (
                 <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 10 }}
+                  initial={{ opacity: 0, y: 10, scale: 0.98 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 10, scale: 0.98 }}
                   transition={{ duration: 0.2 }}
                   style={{
                     position: "absolute",
-                    top: "30px",
-                    left: 0,
-                    background: "rgba(20,18,12,0.95)",
-                    border: "1px solid rgba(232,145,58,0.15)",
-                    borderRadius: 12,
+                    top: "38px",
+                    ...getDropdownPosition(),
+                    background: "rgba(15,12,8,0.98)",
+                    border: "1px solid rgba(232,145,58,0.2)",
+                    borderRadius: 14,
                     padding: "10px",
-                    minWidth: 180,
-                    backdropFilter: "blur(10px)",
+                    backdropFilter: "blur(14px)",
+                    boxShadow: "0 20px 50px rgba(0,0,0,0.5)",
+                    maxWidth: "90vw",
+                    minWidth: 150,
+                    whiteSpace: "nowrap",
                   }}
                 >
                   {menu[key].map((item) => (
@@ -122,12 +144,12 @@ export default function Navbar() {
                         fontSize: 13,
                         color: "#f5efe6",
                         textDecoration: "none",
-                        borderRadius: 8,
-                        transition: "all 0.2s",
+                        borderRadius: 10,
+                        transition: "0.2s",
                       }}
                       onMouseOver={(e) =>
-                      (e.currentTarget.style.background =
-                        "rgba(232,145,58,0.1)")
+                        (e.currentTarget.style.background =
+                          "rgba(232,145,58,0.12)")
                       }
                       onMouseOut={(e) =>
                         (e.currentTarget.style.background = "transparent")
