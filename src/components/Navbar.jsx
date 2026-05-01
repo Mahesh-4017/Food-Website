@@ -117,7 +117,7 @@ export default function Navbar() {
                   style={{
                     position: "absolute",
                     top: 38,
-                    left: -40,
+                    left: 50,
                     background: "rgba(15,12,8,0.98)",
                     border: "1px solid rgba(232,145,58,0.2)",
                     borderRadius: 14,
@@ -150,7 +150,7 @@ export default function Navbar() {
       {/* MOBILE BUTTON */}
       <div
         onClick={() => setMobileOpen(!mobileOpen)}
-        className="block md:hidden"
+        className="flex md:hidden"
         style={{
           flexDirection: "column",
           gap: 4,
