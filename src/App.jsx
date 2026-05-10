@@ -22,8 +22,11 @@ import HomeCocktail from "./pages/Cocktails/Home/home";
 import CocktailDetails from "./pages/Cocktails/CocktailDetails/CocktailDetails";
 import Latest from "./pages/Cocktails/Cocktail/Cocktail";
 import NotFound from "./pages/NotFound/NotFound";
-
-
+import Specials from "./pages/specials/specials";
+import Chefstable from "./pages/chefs-table/chefstable";
+import Tasting from "./pages/tasting/tasting";
+import Worldcuisine from "./pages/world-cuisine/Worldcuisine";
+import Meals from "./pages/meals/meals";
 
 export default function App() {
     const [introComplete, setIntroComplete] = useState(false);
@@ -63,6 +66,11 @@ export default function App() {
         <Route path="/cocktail/:id" element={<CocktailDetails />} />
         <Route path="/cocktail" element={<Latest />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="/specials" element={<Specials/>} />
+        <Route path="/chefs-table" element={<Chefstable/>} />
+        <Route path="/tasting" element={<Tasting/>} />
+        <Route path="/world-cuisine" element={<Worldcuisine/>} />
+        <Route path="/meals" element={<Meals/>} />
       </Routes>
 
       <Footer />

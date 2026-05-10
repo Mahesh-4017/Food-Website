@@ -40,8 +40,8 @@ export default function Breadcrumbs() {
     return (
         <nav
             aria-label="Breadcrumb"
+            className="hidden md:flex"
             style={{
-                display: "flex",
                 alignItems: "center",
                 flexWrap: "wrap",
                 gap: 6,
