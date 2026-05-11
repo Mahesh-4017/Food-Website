@@ -27,6 +27,7 @@ import Chefstable from "./pages/chefs-table/chefstable";
 import Tasting from "./pages/tasting/tasting";
 import Worldcuisine from "./pages/world-cuisine/Worldcuisine";
 import Meals from "./pages/meals/meals";
+import Cursor from "./components/Cursor";
 
 export default function App() {
     const [introComplete, setIntroComplete] = useState(false);
@@ -47,6 +48,7 @@ export default function App() {
     <BrowserRouter>
      <ScrollToTop />
       <Navbar />
+      <Cursor />
 
       <Routes>
         <Route path="/" element={<Home />} />
