@@ -28,7 +28,7 @@ import Tasting from "./pages/tasting/tasting";
 import Worldcuisine from "./pages/world-cuisine/Worldcuisine";
 import Meals from "./pages/meals/meals";
 import Cursor from "./components/Cursor";
-import New from "./pages/Cocktails/new/new";
+import New from "./pages/Cocktails/new/New";
 import Classics from "./pages/Cocktails/classics/Classics";
 import Mocktails from "./pages/Cocktails/mocktails/Mocktails";
 import RandomCocktail from "./pages/Cocktails/random/randomCocktail"; 
