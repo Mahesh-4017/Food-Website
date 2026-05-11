@@ -235,7 +235,6 @@ export default function Navbar() {
         {/* DESKTOP NAV */}
         <div
           style={{
-            display: "flex",
             gap: 6,
             alignItems: "center",
           }}
@@ -420,7 +419,7 @@ export default function Navbar() {
 
         {/* RIGHT SIDE — SEARCH + CTA */}
         <div
-          style={{ display: "flex", alignItems: "center", gap: 14 }}
+          style={{alignItems: "center", gap: 14 }}
           className="hidden md:flex"
         >
           <motion.button
