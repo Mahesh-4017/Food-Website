@@ -44,11 +44,13 @@ const Cursor = () => {
     window.addEventListener("mousemove", move);
     document.addEventListener("mouseover", over);
     document.addEventListener("mouseout", out);
+    document.body.style.cursor = "none";
 
     return () => {
       window.removeEventListener("mousemove", move);
       document.removeEventListener("mouseover", over);
       document.removeEventListener("mouseout", out);
+      
     };
   }, []);
 

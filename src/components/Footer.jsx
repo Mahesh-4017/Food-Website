@@ -518,7 +518,7 @@ function FooterMain() {
               }}>
                 {col.heading}
               </h4>
-              <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 11 }}>
+              <ul style={{ listStyle: "none", margin: 0, display: "flex", flexDirection: "column", gap: 11 }}>
                 {col.links.map(link => (
                   <li key={link}>
                     <motion.a
@@ -616,7 +616,7 @@ export default function Footer() {
     <>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Cormorant+Garamond:wght@400;500;600&display=swap');
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * { box-sizing: border-box; margin: 0; }
         input::placeholder { color: #2a1a0a; }
       `}</style>
       <CTASection />

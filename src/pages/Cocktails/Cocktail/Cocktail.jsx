@@ -309,7 +309,7 @@ export default function Latest() {
 
       <style>{`
         @keyframes shimmer { 0%{opacity:.6} 50%{opacity:1} 100%{opacity:.6} }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * { box-sizing: border-box; margin: 0; }
         ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-track { background: #111; }
         ::-webkit-scrollbar-thumb { background: rgba(212,175,55,0.3); border-radius: 4px; }

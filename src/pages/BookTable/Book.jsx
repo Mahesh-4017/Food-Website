@@ -203,7 +203,7 @@ function RestaurantCard({ restaurant, index }) {
             background: "none", border: "none", cursor: "pointer",
             fontFamily: "'Cormorant Garamond', serif",
             fontSize: 11, letterSpacing: "0.15em", color: "#4a3a2a",
-            textTransform: "uppercase", padding: 0, marginBottom: 14,
+            textTransform: "uppercase", marginBottom: 14,
             alignSelf: "flex-start", transition: "color 0.2s",
           }}
           onMouseEnter={e => e.target.style.color = "#e8913a"}

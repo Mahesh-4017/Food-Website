@@ -212,7 +212,7 @@ function Modal({ drink, onClose }) {
             <div style={{ fontFamily: "Helvetica Neue,sans-serif", fontSize: 11, letterSpacing: 2, textTransform: "uppercase", color: "rgba(255,255,255,0.35)", marginBottom: "0.75rem" }}>
               Instructions
             </div>
-            <p style={{ fontFamily: "Helvetica Neue,sans-serif", fontSize: 13, color: "rgba(255,255,255,0.5)", lineHeight: 1.8, margin: 0 }}>
+            <p style={{ fontFamily: "Helvetica Neue,sans-serif", fontSize: 13, color: "rgba(255,255,255,0.5)", lineHeight: 1.8}}>
               {drink.strInstructions || "No instructions available."}
             </p>
           </div>

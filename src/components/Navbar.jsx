@@ -49,7 +49,7 @@ const menu = {
       {
         name: "Meals Explorer",
         desc: "Browse by ingredient or dish",
-        path: "/meal",
+        path: "/meals",
         icon: "◈",
       },
       {

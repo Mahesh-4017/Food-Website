@@ -650,7 +650,7 @@ const Menu = () => {
     <div style={{ minHeight: "100vh", background: "#0c0c0c", color: "#f5efe6" }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Cormorant+Garamond:wght@400;500;600&display=swap');
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * { box-sizing: border-box; margin: 0; }
         input::placeholder { color: #2a1a0a; }
         ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-track { background: #0c0c0c; }

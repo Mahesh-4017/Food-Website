@@ -473,7 +473,7 @@ function PackageCard({ pkg, index }) {
         </div>
 
         {/* Features */}
-        <ul style={{ listStyle: "none", padding: 0, margin: "0 0 28px", display: "flex", flexDirection: "column", gap: 10, flex: 1 }}>
+        <ul style={{ listStyle: "none", margin: "0 0 28px", display: "flex", flexDirection: "column", gap: 10, flex: 1 }}>
           {pkg.features.map(f => (
             <li key={f} style={{ display: "flex", alignItems: "flex-start", gap: 10 }}>
               <span style={{ color: pkg.accent, fontSize: 12, marginTop: 3, flexShrink: 0 }}>✦</span>
@@ -659,7 +659,6 @@ function Testimonials() {
                 borderRadius: 3, border: "none",
                 background: i === active ? "#e8913a" : "rgba(232,145,58,0.2)",
                 cursor: "pointer", transition: "all 0.3s",
-                padding: 0,
               }}
             />
           ))}
@@ -818,7 +817,7 @@ const Private = () => {
     <div style={{ background: "#0a0804", minHeight: "100vh", overflowX: "hidden" }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Cormorant+Garamond:wght@400;500;600&display=swap');
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; }
         body { background: #0a0804; }
         input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(0.3) sepia(1) saturate(2) hue-rotate(10deg); opacity: 0.5; }
         input::placeholder, textarea::placeholder { color: #2a1a0a; }
