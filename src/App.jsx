@@ -32,6 +32,9 @@ import New from "./pages/Cocktails/new/New";
 import Classics from "./pages/Cocktails/classics/Classics";
 import Mocktails from "./pages/Cocktails/mocktails/Mocktails";
 import RandomCocktail from "./pages/Cocktails/random/randomCocktail"; 
+import Winepairing from "./pages/Wine pairing/winepairing";
+import Vouchers from "./pages/Vouchers/Vouchers";
+import Contact from "./pages/contact/Contact";
 
 export default function App() {
     const [introComplete, setIntroComplete] = useState(false);
@@ -81,6 +84,9 @@ export default function App() {
         <Route path="/cocktails/mocktails" element={<Mocktails/>} />
         <Route path="/random-cocktail" element={<RandomCocktail/>} />
         <Route path="*" element={<NotFound />} />
+        <Route path="/wine-pairing" element={<Winepairing/>} />
+        <Route path="/vouchers" element={<Vouchers/>} />
+        <Route path="/contact" element={<Contact/>} />
 
       </Routes>
 

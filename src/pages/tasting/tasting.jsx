@@ -177,7 +177,7 @@ export default function TastingMenu() {
         >
           <div
             className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: "url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=2070')", opacity: 0.45 }}
+            style={{ backgroundImage: "url('https://w0.peakpx.com/wallpaper/760/294/HD-wallpaper-republic-day-brunching-chennai-chefs-roll-out-dishes-from-every-indian-state-and-tri-coloured-dess-north-indian-food.jpg')", opacity: 0.45 }}
           />
         </motion.div>
 
@@ -528,7 +528,7 @@ function CourseCard({ item, i, expandedId, setExpandedId }) {
           onClick={() => setExpandedId(expandedId === item.id ? null : item.id)}
           animate={{ rotate: expandedId === item.id ? 45 : 0 }}
           transition={{ duration: 0.3 }}
-          className="text-[#c8a050] text-3xl w-9 h-9 flex items-center justify-center border border-[#c8a050]/30 hover:bg-[#c8a050]/10 transition-colors flex-shrink-0 mt-1"
+          className="text-[#c8a050] rounded-full pb-1 text-3xl w-9 h-9 flex items-center justify-center border border-[#c8a050]/30 hover:bg-[#c8a050]/10 transition-colors flex-shrink-0"
           aria-label="Expand details"
         >
           +

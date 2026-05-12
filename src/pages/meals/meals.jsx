@@ -64,7 +64,7 @@ const mealsData = [
     price: "$24",
     desc: "Slow-cooked Mughlai biryani layered with saffron, dum-sealed for maximum aroma.",
     badge: "Heritage",
-    image: "https://images.unsplash.com/photo-1563379091339-03246963d29a?q=80&w=1974&auto=format&fit=crop",
+    image: "https://w0.peakpx.com/wallpaper/760/294/HD-wallpaper-republic-day-brunching-chennai-chefs-roll-out-dishes-from-every-indian-state-and-tri-coloured-dess-north-indian-food.jpg",
   },
   {
     title: "Seafood Delight",
@@ -205,7 +205,7 @@ function MealCard({ meal, i }) {
           <motion.span
             animate={{ rotate: hovered ? 45 : 0 }}
             transition={{ duration: 0.3 }}
-            className={`${T.gold} text-2xl w-9 h-9 flex items-center justify-center border ${T.goldBorder} ${T.radiusBadge} flex-shrink-0 mt-1`}
+            className={`${T.gold} text-2xl w-9 h-9 pb-1 flex items-center justify-center border ${T.goldBorder} ${T.radiusBadge} flex-shrink-0 mt-1`}
           >
             +
           </motion.span>
@@ -264,7 +264,7 @@ export default function Meals() {
         transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
         className={`fixed top-0 inset-x-0 z-50 flex items-center justify-between px-6 sm:px-10 py-4 border-b ${T.borderSubtle} backdrop-blur-xl bg-black/80`}
       >
-        <span className={`${T.gold} tracking-[0.45em] text-[11px] uppercase`}>Lumine</span>
+        <span className={`${T.gold} tracking-[0.45em] text-[14px] uppercase`}>Lumine</span>
         <div className="hidden md:flex gap-10">
           {["Menu", "Experience", "Reserve"].map(n => (
             <button key={n} className={`${T.textMuted} hover:text-white text-[11px] tracking-[0.25em] uppercase transition-colors duration-300`}>{n}</button>
@@ -311,7 +311,7 @@ export default function Meals() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.9 }}
-            className={`${T.textSecondary} text-base sm:text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-12`}
+            className={`${T.textSecondary} text-base sm:text-lg md:text-2xl max-w-2xl mx-auto leading-relaxed mb-12`}
           >
             Discover handcrafted dishes inspired by global flavors, premium
             ingredients, and elevated fine dining experiences.
@@ -326,7 +326,7 @@ export default function Meals() {
             <motion.button
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.97 }}
-              className={`${T.goldBg} text-black px-10 py-4 ${T.radiusBadge} text-[11px] tracking-[0.3em] uppercase font-bold ${T.goldShadow} transition-all duration-500`}
+              className={`${T.goldBg} text-black px-7 py-3.5 ${T.radiusBadge} text-[13px] tracking-[0.3em] uppercase font-extrabold ${T.goldShadow} transition-all duration-500`}
             >
               Explore Menu
             </motion.button>
@@ -495,7 +495,7 @@ export default function Meals() {
               <div className={`absolute -top-8 -right-8 w-48 h-48 rounded-full border ${T.borderSubtle} pointer-events-none`} />
 
               <img
-                src="https://images.unsplash.com/photo-1552566626-52f8b828add9?q=80&w=2070&auto=format&fit=crop"
+                src="https://w0.peakpx.com/wallpaper/441/84/HD-wallpaper-cocktails-drinks-other.jpg"
                 alt="Fine dining"
                 className={`${T.radiusCard} h-[480px] sm:h-[600px] w-full object-cover`}
               />

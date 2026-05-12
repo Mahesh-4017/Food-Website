@@ -408,7 +408,7 @@ export default function CocktailApp() {
             display:"inline-flex", alignItems:"center", gap:8,
             border:"1px solid rgba(201,168,76,.4)", borderRadius:999,
             padding:"6px 16px", marginBottom:"2rem",
-            fontFamily:"Helvetica Neue,sans-serif", fontSize:12, letterSpacing:3,
+            fontFamily:"Helvetica Neue,sans-serif", fontSize:11, letterSpacing:3,
             textTransform:"uppercase", color:"#c9a84c"
           }}>
             <span style={{ width:6, height:6, borderRadius:"50%", background:"#c9a84c", animation:"blink 2s infinite", display:"inline-block" }} />

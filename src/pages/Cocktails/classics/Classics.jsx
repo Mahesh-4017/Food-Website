@@ -50,37 +50,165 @@ export default function Classics() {
         <div className="relative z-10 grid lg:grid-cols-2 gap-16 items-center max-w-7xl mx-auto w-full">
           
           {/* LEFT */}
-          <motion.div
-            initial={{ opacity: 0, y: 80 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
-          >
-            <p className="uppercase tracking-[0.5em] text-[#c8a050] text-sm mb-6">
-              Timeless Collection
-            </p>
+<motion.div
+  initial={{ opacity: 0, y: 100 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{
+    duration: 1.2,
+    ease: [0.22, 1, 0.36, 1],
+  }}
+  className="relative z-10 max-w-3xl"
+>
+  {/* TOP LABEL */}
+  <div className="mb-8 flex items-center gap-5">
+    <motion.div
+      initial={{ width: 0 }}
+      animate={{ width: 80 }}
+      transition={{ delay: 0.4, duration: 1 }}
+      className="h-[1px] bg-[#c8a050]"
+    />
 
-            <h1 className="text-6xl md:text-8xl font-light leading-none mb-8">
-              Cocktail
-              <span className="block italic text-[#c8a050]">
-                Classics
-              </span>
-            </h1>
+    <p className="text-[11px] uppercase tracking-[0.45em] text-[#c8a050]">
+      Timeless Collection
+    </p>
+  </div>
 
-            <p className="text-gray-300 text-lg leading-relaxed max-w-xl mb-10">
-              Legendary cocktails reimagined with luxury ingredients,
-              artistic presentation, and refined modern mixology.
-            </p>
+  {/* HEADING */}
+  <div className="overflow-hidden">
+    <motion.h1
+      initial={{ y: "100%" }}
+      animate={{ y: 0 }}
+      transition={{
+        delay: 0.2,
+        duration: 1,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+      className="text-[4rem] sm:text-[5rem] md:text-[7rem] lg:text-[9rem] font-black leading-[0.9] tracking-[-0.06em] text-white"
+    >
+      Cocktail
+    </motion.h1>
+  </div>
 
-            <div className="flex flex-wrap gap-4">
-              <button className="bg-[#c8a050] text-black px-10 py-4 rounded-full hover:scale-105 transition">
-                Explore Classics
-              </button>
+  <div className="overflow-hidden">
+    <motion.h1
+      initial={{ y: "100%" }}
+      animate={{ y: 0 }}
+      transition={{
+        delay: 0.35,
+        duration: 1,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+      className="pl-1 text-[4rem] sm:text-[5rem] md:text-[7rem] lg:text-[9rem] font-black italic leading-[0.9] tracking-[-0.06em] text-[#c8a050]"
+    >
+      Classics
+    </motion.h1>
+  </div>
 
-              <button className="border border-white/20 px-10 py-4 rounded-full hover:bg-white hover:text-black transition">
-                Reserve Lounge
-              </button>
-            </div>
-          </motion.div>
+  {/* DESC */}
+  <motion.p
+    initial={{ opacity: 0, y: 40 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{
+      delay: 0.55,
+      duration: 1,
+    }}
+    className="mt-8 max-w-2xl text-base sm:text-lg md:text-xl leading-8 md:leading-9 text-gray-300"
+  >
+    Legendary cocktails elevated through rare ingredients,
+    theatrical presentation, and refined contemporary mixology
+    crafted for unforgettable nights.
+  </motion.p>
+
+  {/* BUTTONS */}
+  <motion.div
+    initial={{ opacity: 0, y: 40 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{
+      delay: 0.7,
+      duration: 1,
+    }}
+    className="mt-12 flex flex-col gap-4 sm:flex-row"
+  >
+    {/* PRIMARY BTN */}
+    <motion.button
+      whileHover={{
+        scale: 1.05,
+        y: -3,
+      }}
+      whileTap={{
+        scale: 0.96,
+      }}
+      className="group relative overflow-hidden rounded-full bg-[#c8a050] px-10 py-5 text-sm font-semibold uppercase tracking-[0.25em] text-black"
+    >
+      <span className="relative z-10 flex items-center justify-center gap-2">
+        Explore Classics
+
+        <motion.span
+          whileHover={{ x: 4, y: -4 }}
+          className="text-lg"
+        >
+          ↗
+        </motion.span>
+      </span>
+
+      {/* Shine */}
+      <motion.div
+        initial={{ x: "-120%" }}
+        whileHover={{ x: "120%" }}
+        transition={{ duration: 0.8 }}
+        className="absolute inset-0 skew-x-12 bg-white/30"
+      />
+    </motion.button>
+
+    {/* SECONDARY BTN */}
+    <motion.button
+      whileHover={{
+        scale: 1.05,
+        borderColor: "#fff",
+        backgroundColor: "rgba(255,255,255,0.08)",
+      }}
+      whileTap={{
+        scale: 0.96,
+      }}
+      className="rounded-full border border-white/15 bg-white/[0.03] px-10 py-5 text-sm uppercase tracking-[0.25em] text-white backdrop-blur-xl transition"
+    >
+      Reserve Lounge
+    </motion.button>
+  </motion.div>
+
+  {/* FLOATING INFO */}
+  <motion.div
+    animate={{
+      y: [0, -10, 0],
+    }}
+    transition={{
+      duration: 5,
+      repeat: Infinity,
+    }}
+    className="mt-14 flex w-fit items-center gap-5 rounded-full border border-white/10 bg-white/[0.03] px-6 py-4 backdrop-blur-2xl"
+  >
+    <div className="flex -space-x-3">
+      {[1, 2, 3].map((i) => (
+        <img
+          key={i}
+          src={`https://i.pravatar.cc/100?img=${i + 10}`}
+          alt=""
+          className="h-10 w-10 rounded-full border-2 border-black object-cover"
+        />
+      ))}
+    </div>
+
+    <div>
+      <p className="text-sm text-white">
+        12k+ Luxury Guests
+      </p>
+
+      <p className="text-xs uppercase tracking-[0.2em] text-[#c8a050]">
+        Worldwide Experience
+      </p>
+    </div>
+  </motion.div>
+</motion.div>
 
           {/* RIGHT BIG NUMBER */}
           <motion.div

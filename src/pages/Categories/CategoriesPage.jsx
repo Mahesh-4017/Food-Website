@@ -16,7 +16,7 @@ function CategoryStrip({ categories }) {
         borderTop: `1px solid rgba(255,255,255,0.07)`,
         borderBottom: `1px solid rgba(255,255,255,0.07)`,
         padding: "10px 0",
-        marginBottom: 60,
+        marginBottom: 40,
         position: "relative",
       }}
     >
@@ -49,11 +49,18 @@ function CategoryCard({ category, index, onClick }) {
   const ref = useRef(null);
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
-  const rotateX = useTransform(mouseY, [-100, 100], [6, -6]);
-  const rotateY = useTransform(mouseX, [-100, 100], [-6, 6]);
   const [hovered, setHovered] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 640);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   const handleMouseMove = (e) => {
+    if (!ref.current) return;
     const rect = ref.current.getBoundingClientRect();
     mouseX.set(e.clientX - rect.left - rect.width / 2);
     mouseY.set(e.clientY - rect.top - rect.height / 2);
@@ -61,6 +68,108 @@ function CategoryCard({ category, index, onClick }) {
 
   const isEven = index % 2 === 0;
 
+  /* ── Mobile layout: stacked card ── */
+  if (isMobile) {
+    return (
+      <motion.div
+        ref={ref}
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: index * 0.06, ease: [0.16, 1, 0.3, 1] }}
+        onClick={onClick}
+        style={{
+          cursor: "pointer",
+          borderRadius: 6,
+          overflow: "hidden",
+          border: `1px solid rgba(255,255,255,0.06)`,
+          position: "relative",
+          background: "#0d0d0d",
+        }}
+      >
+        {/* Image */}
+        <div style={{ position: "relative", height: 200, overflow: "hidden" }}>
+          <img
+            src={category.strCategoryThumb}
+            alt={category.strCategory}
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              display: "block",
+              filter: "brightness(0.55) saturate(0.6)",
+            }}
+          />
+          {/* Number overlay */}
+          <div
+            style={{
+              position: "absolute",
+              top: 12,
+              right: 14,
+              fontFamily: "'Bebas Neue', sans-serif",
+              fontSize: 56,
+              lineHeight: 1,
+              color: "rgba(255,255,255,0.1)",
+              pointerEvents: "none",
+            }}
+          >
+            {String(index + 1).padStart(2, "0")}
+          </div>
+          {/* Bottom fade */}
+          <div
+            style={{
+              position: "absolute",
+              bottom: 0,
+              left: 0,
+              right: 0,
+              height: 80,
+              background: "linear-gradient(transparent, #0d0d0d)",
+            }}
+          />
+        </div>
+
+        {/* Text */}
+        <div style={{ padding: "20px 20px 24px" }}>
+          <div style={{ width: 24, height: 2, background: ACCENT, marginBottom: 14 }} />
+          <h3
+            style={{
+              color: "#f5f0e8",
+              fontSize: 24,
+              fontFamily: "'Cormorant Garamond', serif",
+              fontWeight: 700,
+              margin: 0,
+              lineHeight: 1.1,
+            }}
+          >
+            {category.strCategory}
+          </h3>
+          <p
+            style={{
+              color: "#555",
+              fontSize: 14,
+              lineHeight: 1.7,
+              marginTop: 10,
+              fontFamily: "Georgia, serif",
+            }}
+          >
+            {category.strCategoryDescription.slice(0, 90)}…
+          </p>
+          <div
+            style={{
+              marginTop: 16,
+              color: ACCENT,
+              fontSize: 11,
+              fontFamily: "'Bebas Neue', sans-serif",
+              letterSpacing: 3,
+            }}
+          >
+            EXPLORE →
+          </div>
+        </div>
+      </motion.div>
+    );
+  }
+
+  /* ── Tablet/Desktop layout: horizontal split ── */
   return (
     <motion.div
       ref={ref}
@@ -83,8 +192,7 @@ function CategoryCard({ category, index, onClick }) {
         borderRadius: 4,
         overflow: "hidden",
         border: `1px solid rgba(255,255,255,0.06)`,
-        height: 290,
-        perspective: 800,
+        height: "clamp(200px, 25vw, 290px)",
         position: "relative",
       }}
     >
@@ -106,11 +214,12 @@ function CategoryCard({ category, index, onClick }) {
             height: "100%",
             objectFit: "contain",
             display: "block",
-            filter: hovered ? "brightness(0.95)" : "brightness(0.65) saturate(0.6)",
+            filter: hovered
+              ? "brightness(0.95)"
+              : "brightness(0.65) saturate(0.6)",
             transition: "filter 0.5s",
           }}
         />
-        {/* Number badge */}
         <div
           style={{
             position: "absolute",
@@ -118,7 +227,7 @@ function CategoryCard({ category, index, onClick }) {
             left: isEven ? "auto" : 16,
             right: isEven ? 16 : "auto",
             fontFamily: "'Bebas Neue', sans-serif",
-            fontSize: 64,
+            fontSize: "clamp(40px, 5vw, 64px)",
             lineHeight: 1,
             color: "rgba(255,255,255,0.1)",
             pointerEvents: "none",
@@ -134,7 +243,7 @@ function CategoryCard({ category, index, onClick }) {
           order: isEven ? 2 : 1,
           background: hovered ? "#111" : "#0d0d0d",
           transition: "background 0.3s",
-          padding: "32px 36px",
+          padding: "clamp(20px, 3vw, 32px) clamp(20px, 3vw, 36px)",
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
@@ -144,16 +253,12 @@ function CategoryCard({ category, index, onClick }) {
           <motion.div
             animate={{ width: hovered ? "48px" : "24px" }}
             transition={{ duration: 0.3 }}
-            style={{
-              height: 2,
-              background: ACCENT,
-              marginBottom: 18,
-            }}
+            style={{ height: 2, background: ACCENT, marginBottom: 18 }}
           />
           <h3
             style={{
               color: "#f5f0e8",
-              fontSize: 28,
+              fontSize: "clamp(20px, 2.2vw, 28px)",
               fontFamily: "'Cormorant Garamond', serif",
               fontWeight: 700,
               margin: 0,
@@ -166,7 +271,7 @@ function CategoryCard({ category, index, onClick }) {
           <p
             style={{
               color: "#555",
-              fontSize: 18,
+              fontSize: "clamp(13px, 1.4vw, 18px)",
               lineHeight: 1.7,
               marginTop: 12,
               fontFamily: "Georgia, serif",
@@ -223,10 +328,10 @@ export default function CategoriesPage() {
 
   return (
     <>
-      {/* Font imports */}
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:wght@400;600;700&display=swap');
-        body { background: ${BG}; }
+        body { background: ${BG}; margin: 0; }
+        * { box-sizing: border-box; }
       `}</style>
 
       <motion.div
@@ -236,14 +341,14 @@ export default function CategoriesPage() {
         style={{
           minHeight: "100vh",
           background: BG,
-          padding: "50px 40px 80px",
+          padding: "clamp(24px, 5vw, 50px) clamp(16px, 4vw, 40px) 80px",
         }}
       >
-        <div style={{ maxWidth: "100%", margin: "0 auto" }}>
+        <div style={{ maxWidth: 1300, margin: "0 auto" }}>
           <Breadcrumbs />
 
           {/* Header */}
-          <div style={{ marginBottom: 48, marginTop: 20 }}>
+          <div style={{ marginBottom: 36, marginTop: 20 }}>
             <motion.div
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
@@ -255,14 +360,22 @@ export default function CategoriesPage() {
                 transformOrigin: "left",
               }}
             />
-            <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between" }}>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "flex-end",
+                justifyContent: "space-between",
+                flexWrap: "wrap",
+                gap: 8,
+              }}
+            >
               <motion.h1
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
                 style={{
                   color: "#f5f0e8",
-                  fontSize: 72,
+                  fontSize: "clamp(40px, 9vw, 72px)",
                   margin: 0,
                   fontFamily: "'Bebas Neue', sans-serif",
                   letterSpacing: 2,
@@ -280,7 +393,7 @@ export default function CategoriesPage() {
                   fontFamily: "'Bebas Neue', sans-serif",
                   fontSize: 14,
                   letterSpacing: 4,
-                  paddingBottom: 8,
+                  paddingBottom: 6,
                 }}
               >
                 {categories.length} TOTAL
@@ -301,11 +414,7 @@ export default function CategoriesPage() {
                   key={i}
                   animate={{ opacity: [0.3, 0.6, 0.3] }}
                   transition={{ duration: 1.4, repeat: Infinity, delay: i * 0.2 }}
-                  style={{
-                    height: 220,
-                    background: "#111",
-                    borderRadius: 4,
-                  }}
+                  style={{ height: 220, background: "#111", borderRadius: 4 }}
                 />
               ))}
             </div>

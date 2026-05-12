@@ -292,7 +292,7 @@ export default function Worldcuisine() {
         <motion.div style={{ y: heroY }} className="absolute inset-0">
           <div
             className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: "url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=2070&auto=format&fit=crop')", opacity: 0.35 }}
+            style={{ backgroundImage: "url('https://media.istockphoto.com/id/2197265525/photo/cocktail-glass-on-table-full.jpg?s=612x612&w=0&k=20&c=ehwidgFSsYOn9Y2pJsxwJbTuOwXVl-2IrMnrRPbQrs4=')", opacity: 0.35 }}
           />
         </motion.div>
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-[#050505]" />
@@ -312,7 +312,7 @@ export default function Worldcuisine() {
               initial={{ y: "100%" }}
               animate={{ y: 0 }}
               transition={{ duration: 1.1, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-              className={`text-[clamp(3.5rem,11vw,8.5rem)] font-extralight leading-none tracking-tight ${T.serif}`}
+              className={`text-[clamp(3.5rem,11vw,8.5rem)] font-light leading-none tracking-tight ${T.serif}`}
             >
               World<span className={`italic ${T.gold}`}> Cuisine</span>
             </motion.h1>
@@ -322,7 +322,7 @@ export default function Worldcuisine() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.9 }}
-            className={`${T.textSecondary} text-base sm:text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-12`}
+            className={`${T.textSecondary} text-base sm:text-lg md:text-2xl max-w-2xl mx-auto leading-relaxed mb-12`}
           >
             Discover authentic flavors from across the globe — elevated with modern
             presentation and luxurious dining experiences.
@@ -337,7 +337,7 @@ export default function Worldcuisine() {
             <motion.button
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.97 }}
-              className={`${T.goldBg} text-black px-10 py-4 ${T.radiusBadge} text-[11px] tracking-[0.3em] uppercase font-bold ${T.goldShadow} transition-all duration-500`}
+              className={`${T.goldBg} text-black px-5 py-3 ${T.radiusBadge} text-[13px] tracking-[0.3em] uppercase font-extrabold ${T.goldShadow} transition-all duration-500`}
             >
               Explore Experiences
             </motion.button>
@@ -474,7 +474,7 @@ export default function Worldcuisine() {
               <div className={`absolute -top-8 -right-8 w-48 h-48 rounded-full border ${T.borderSubtle} pointer-events-none`} />
 
               <img
-                src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?q=80&w=2070&auto=format&fit=crop"
+                src="https://images.pexels.com/photos/15590361/pexels-photo-15590361/free-photo-of-cocktail-and-food.jpeg"
                 alt="Dining experience"
                 className={`${T.radiusCard} h-[480px] sm:h-[600px] w-full object-cover`}
               />

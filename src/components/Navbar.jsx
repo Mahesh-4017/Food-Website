@@ -4,158 +4,42 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 
 const menu = {
   Discover: {
-    icon: "✦",
-    featured: {
-      label: "Today's Special",
-      desc: "Truffle Risotto — Chef's pick",
-      path: "/specials",
-    },
     links: [
-      { name: "Home", desc: "Back to start", path: "/", icon: "⌂" },
-      {
-        name: "Our Menu",
-        desc: "Full seasonal menu",
-        path: "/menu",
-        icon: "◈",
-      },
-      {
-        name: "Chef's Table",
-        desc: "Exclusive 8-course experience",
-        path: "/chefs-table",
-        icon: "◉",
-      },
-      {
-        name: "Daily Specials",
-        desc: "What's fresh today",
-        path: "/specials",
-        icon: "✦",
-      },
-      {
-        name: "Tasting Menu",
-        desc: "Journey through flavours",
-        path: "/tasting",
-        icon: "◇",
-      },
+      { name: "Home", desc: "Back to start", path: "/" },
+      { name: "Our Menu", desc: "Full seasonal menu", path: "/menu" },
+      { name: "Chef's Table", desc: "Exclusive experience", path: "/chefs-table" },
+      { name: "Daily Specials", desc: "Fresh today", path: "/specials" },
+      { name: "Tasting Menu", desc: "Journey through flavours", path: "/tasting" },
     ],
   },
+
   Cuisine: {
-    icon: "◈",
-    featured: {
-      label: "World Flavours",
-      desc: "Explore 40+ regional cuisines",
-      path: "/world-cuisine",
-    },
     links: [
-      {
-        name: "Meals Explorer",
-        desc: "Browse by ingredient or dish",
-        path: "/meals",
-        icon: "◈",
-      },
-      {
-        name: "World Cuisine",
-        desc: "Dishes from every continent",
-        path: "/world-cuisine",
-        icon: "◯",
-      },
-      {
-        name: "Categories",
-        desc: "Starters, mains, desserts",
-        path: "/categories",
-        icon: "▦",
-      },
-      {
-        name: "Trending Now",
-        desc: "Most ordered this month",
-        path: "/trending",
-        icon: "↑",
-      },
-      {
-        name: "Surprise Me",
-        desc: "Random chef's recommendation",
-        path: "/random",
-        icon: "?",
-      },
+      { name: "Meals Explorer", desc: "Browse meals", path: "/meals" },
+      { name: "World Cuisine", desc: "Global dishes", path: "/world-cuisine" },
+      { name: "Categories", desc: "Food categories", path: "/categories" },
+      { name: "Trending", desc: "Most popular", path: "/trending" },
+      { name: "Random", desc: "Surprise meal", path: "/random" },
     ],
   },
+
   Cocktails: {
-    icon: "◇",
-    featured: {
-      label: "Signature Serve",
-      desc: "Smoked Negroni — bar favourite",
-      path: "/cocktail",
-    },
     links: [
-      {
-        name: "Cocktail Bar",
-        desc: "Full drinks menu",
-        path: "/home",
-        icon: "◇",
-      },
-      {
-        name: "New Arrivals",
-        desc: "Latest seasonal pours",
-        path: "/cocktails/new",
-        icon: "✦",
-      },
-      {
-        name: "Classic Cocktails",
-        desc: "Timeless recipes",
-        path: "/cocktails/classics",
-        icon: "◯",
-      },
-      {
-        name: "Mocktails",
-        desc: "Zero-proof creations",
-        path: "/cocktails/mocktails",
-        icon: "◈",
-      },
-      {
-        name: "Random Pour",
-        desc: "Let us choose for you",
-        path: "/random-cocktail",
-        icon: "?",
-      },
+      { name: "Cocktail Bar", desc: "Drinks menu", path: "/home" },
+      { name: "New Arrivals", desc: "Seasonal pours", path: "/cocktails/new" },
+      { name: "Classic Cocktails", desc: "Timeless recipes", path: "/cocktails/classics" },
+      { name: "Mocktails", desc: "Zero-proof drinks", path: "/cocktails/mocktails" },
+      { name: "Random Pour", desc: "Surprise cocktail", path: "/random-cocktail" },
     ],
   },
+
   Reserve: {
-    icon: "◉",
-    featured: {
-      label: "Private Dining",
-      desc: "Exclusive rooms for up to 20",
-      path: "/private",
-    },
     links: [
-      {
-        name: "Book a Table",
-        desc: "Reserve your evening",
-        path: "/book",
-        icon: "◉",
-      },
-      {
-        name: "Private Dining",
-        desc: "Events & celebrations",
-        path: "/private",
-        icon: "✦",
-      },
-      {
-        name: "Wine Pairing",
-        desc: "Sommelier-curated flights",
-        path: "/wine-pairing",
-        icon: "◇",
-      },
-      {
-        name: "Gift Vouchers",
-        desc: "Give the gift of LUMINE",
-        path: "/vouchers",
-        icon: "◈",
-      },
-      {
-        name: "Contact Us",
-        desc: "Speak to our team",
-        path: "/contact",
-        icon: "◯",
-      },
+      { name: "Book a Table", desc: "Reserve your evening", path: "/book" },
+      { name: "Private Dining", desc: "Events & parties", path: "/private" },
+      { name: "Wine Pairing", desc: "Curated flights", path: "/wine-pairing" },
+      { name: "Gift Vouchers", desc: "Give LUMINE", path: "/vouchers" },
+      { name: "Contact", desc: "Reach us", path: "/contact" },
     ],
   },
 };
@@ -165,13 +49,19 @@ export default function Navbar() {
   const [openMenu, setOpenMenu] = useState(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileSection, setMobileSection] = useState(null);
+
   const closeTimer = useRef(null);
+
   const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 40);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 40);
+    };
+
     window.addEventListener("scroll", handleScroll);
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -186,59 +76,68 @@ export default function Navbar() {
   };
 
   const handleLeave = () => {
-    closeTimer.current = setTimeout(() => setOpenMenu(null), 120);
+    closeTimer.current = setTimeout(() => {
+      setOpenMenu(null);
+    }, 100);
   };
 
   return (
     <>
+      {/* NAVBAR */}
       <motion.nav
-        initial={{ y: -80, opacity: 0 }}
+        initial={{ y: -70, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 0.5 }}
         style={{
           position: "fixed",
           top: 0,
           left: 0,
           right: 0,
-          zIndex: 100,
-          padding: scrolled ? "10px 40px" : "10px 20px",
+          zIndex: 1000,
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
+          padding:
+            window.innerWidth < 768
+              ? "14px 18px"
+              : scrolled
+                ? "12px 38px"
+                : "16px 34px",
           background: scrolled
             ? "rgba(8,6,3,0.95)"
-            : "linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, transparent 100%)",
-          backdropFilter: scrolled ? "blur(18px)" : "none",
-          borderBottom: scrolled ? "1px solid rgba(200,160,80,0.12)" : "",
-          transition: "padding 0.4s ease, background 0.5s ease",
+            : "linear-gradient(to bottom, rgba(0,0,0,0.65), transparent)",
+          backdropFilter: "blur(14px)",
+          borderBottom: scrolled
+            ? "1px solid rgba(255,255,255,0.06)"
+            : "none",
         }}
       >
         {/* LOGO */}
         <div
           onClick={() => navigate("/")}
           style={{
-            fontFamily:
-              "'Cormorant Garamond', 'Playfair Display', Georgia, serif",
-            fontSize: 26,
+            fontSize: window.innerWidth < 768 ? 22 : 26,
             fontWeight: 300,
-            letterSpacing: "0.3em",
+            letterSpacing: "0.22em",
             cursor: "pointer",
+            color: "#f5efe4",
+            zIndex: 1200,
             userSelect: "none",
-            zIndex: 200,
+            fontFamily:
+              "'Cormorant Garamond', 'Playfair Display', serif",
           }}
         >
-          <span style={{ color: "#f0e8d8" }}>LU</span>
-          <span style={{ color: "#c8a050" }}>MI</span>
-          <span style={{ color: "#f0e8d8" }}>NE</span>
+          LU<span style={{ color: "#c8a050" }}>MI</span>NE
         </div>
 
-        {/* DESKTOP NAV */}
+        {/* DESKTOP MENU */}
         <div
+          className="desktop-nav"
           style={{
+            display: window.innerWidth < 1024 ? "none" : "flex",
             gap: 6,
             alignItems: "center",
           }}
-          className="hidden md:flex"
         >
           {Object.keys(menu).map((key) => (
             <div
@@ -247,167 +146,85 @@ export default function Navbar() {
               onMouseEnter={() => handleEnter(key)}
               onMouseLeave={handleLeave}
             >
-              <motion.button
-                whileHover={{ color: "#c8a050" }}
+              <button
                 style={{
                   background: "none",
                   border: "none",
-                  padding: "8px 16px",
-                  fontSize: 12,
-                  letterSpacing: "0.18em",
-                  textTransform: "uppercase",
-                  color: openMenu === key ? "#c8a050" : "#e8dece",
+                  color: openMenu === key ? "#c8a050" : "#eee",
                   cursor: "pointer",
-                  fontFamily: "inherit",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 5,
-                  transition: "color 0.2s",
+                  padding: "10px 16px",
+                  fontSize: 13,
+                  letterSpacing: "0.14em",
+                  textTransform: "uppercase",
                 }}
               >
                 {key}
-                <motion.span
-                  animate={{ rotate: openMenu === key ? 180 : 0 }}
-                  transition={{ duration: 0.2 }}
-                  style={{ fontSize: 8, opacity: 0.6 }}
-                >
-                  ▼
-                </motion.span>
-              </motion.button>
+              </button>
 
-              {/* MEGA DROPDOWN */}
               <AnimatePresence>
                 {openMenu === key && (
                   <motion.div
-                    initial={{ opacity: 0, y: 8, scale: 0.98 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: 6, scale: 0.98 }}
-                    transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-                    onMouseEnter={() => clearTimeout(closeTimer.current)}
-                    onMouseLeave={handleLeave}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 8 }}
+                    transition={{ duration: 0.2 }}
                     style={{
                       position: "absolute",
-                      top: "calc(100% + 12px)",
+                      top: "100%",
                       left: "50%",
                       transform: "translateX(-50%)",
-                      width: 460,
-                      background: "rgba(10,8,4,0.98)",
-                      border: "1px solid rgba(200,160,80,0.18)",
+                      width: 420,
+                      background: "#0d0b08",
                       borderRadius: 18,
-                      overflow: "hidden",
-                      boxShadow:
-                        "0 32px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(200,160,80,0.06)",
+                      padding: 14,
+                      border: "1px solid rgba(200,160,80,0.14)",
+                      boxShadow: "0 20px 60px rgba(0,0,0,0.45)",
                     }}
                   >
-                    {/* Featured Banner */}
-                    <Link
-                      to={menu[key].featured.path}
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "space-between",
-                        padding: "14px 20px",
-                        background: "rgba(200,160,80,0.08)",
-                        borderBottom: "1px solid rgba(200,160,80,0.1)",
-                        textDecoration: "none",
-                        transition: "background 0.2s",
-                      }}
-                      onMouseEnter={(e) =>
-                        (e.currentTarget.style.background =
-                          "rgba(200,160,80,0.14)")
-                      }
-                      onMouseLeave={(e) =>
-                        (e.currentTarget.style.background =
-                          "rgba(200,160,80,0.08)")
-                      }
-                    >
-                      <div>
-                        <div
-                          style={{
-                            fontSize: 10,
-                            letterSpacing: "0.2em",
-                            color: "#c8a050",
-                            textTransform: "uppercase",
-                            marginBottom: 2,
-                          }}
-                        >
-                          {menu[key].featured.label}
-                        </div>
-                        <div style={{ fontSize: 13, color: "#d8ccbc" }}>
-                          {menu[key].featured.desc}
-                        </div>
-                      </div>
-                      <span style={{ color: "#c8a050", fontSize: 16 }}>→</span>
-                    </Link>
-
-                    {/* Links Grid */}
                     <div
                       style={{
-                        padding: "10px 12px 12px",
                         display: "grid",
                         gridTemplateColumns: "1fr 1fr",
-                        gap: 4,
+                        gap: 8,
                       }}
                     >
-                      {menu[key].links.map((item, i) => (
-                        <motion.div
+                      {menu[key].links.map((item) => (
+                        <Link
                           key={item.name}
-                          initial={{ opacity: 0, x: -6 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: i * 0.04 }}
+                          to={item.path}
+                          style={{
+                            textDecoration: "none",
+                            padding: "12px",
+                            borderRadius: 12,
+                            transition: "0.2s",
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.background =
+                              "rgba(200,160,80,0.08)";
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.background = "transparent";
+                          }}
                         >
-                          <Link
-                            to={item.path}
+                          <div
                             style={{
-                              display: "flex",
-                              alignItems: "flex-start",
-                              gap: 10,
-                              padding: "10px 12px",
-                              borderRadius: 10,
-                              textDecoration: "none",
-                              transition: "background 0.15s",
+                              color: "#f4eee2",
+                              fontSize: 14,
+                              marginBottom: 3,
                             }}
-                            onMouseEnter={(e) =>
-                              (e.currentTarget.style.background =
-                                "rgba(200,160,80,0.07)")
-                            }
-                            onMouseLeave={(e) =>
-                              (e.currentTarget.style.background = "transparent")
-                            }
                           >
-                            <span
-                              style={{
-                                fontSize: 14,
-                                color: "#c8a050",
-                                marginTop: 1,
-                                minWidth: 14,
-                              }}
-                            >
-                              {item.icon}
-                            </span>
-                            <div>
-                              <div
-                                style={{
-                                  fontSize: 13,
-                                  color: "#f0e8d8",
-                                  fontWeight: 500,
-                                  letterSpacing: "0.02em",
-                                }}
-                              >
-                                {item.name}
-                              </div>
-                              <div
-                                style={{
-                                  fontSize: 11,
-                                  color: "#887a68",
-                                  marginTop: 1,
-                                }}
-                              >
-                                {item.desc}
-                              </div>
-                            </div>
-                          </Link>
-                        </motion.div>
+                            {item.name}
+                          </div>
+
+                          <div
+                            style={{
+                              color: "#857968",
+                              fontSize: 11,
+                            }}
+                          >
+                            {item.desc}
+                          </div>
+                        </Link>
                       ))}
                     </div>
                   </motion.div>
@@ -417,118 +234,105 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* RIGHT SIDE — SEARCH + CTA */}
+        {/* RIGHT ACTIONS */}
         <div
-          style={{alignItems: "center", gap: 14 }}
-          className="hidden md:flex"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 10,
+          }}
         >
-          <motion.button
-            whileHover={{ scale: 1.08 }}
-            whileTap={{ scale: 0.92 }}
+          {/* SEARCH */}
+          <button
             onClick={() => navigate("/search")}
             style={{
-              width: 36,
-              height: 36,
+              width: 38,
+              height: 38,
               borderRadius: "50%",
-              border: "1px solid rgba(200,160,80,0.3)",
+              border: "1px solid rgba(200,160,80,0.25)",
               background: "transparent",
-              display: "flex",
+              cursor: "pointer",
+              display: window.innerWidth < 768 ? "none" : "flex",
               alignItems: "center",
               justifyContent: "center",
-              cursor: "pointer",
-              transition: "border-color 0.2s, background 0.2s",
-            }}
-            onHoverStart={(e) => {
-              e.target.style.borderColor = "rgba(200,160,80,0.7)";
-              e.target.style.background = "rgba(200,160,80,0.08)";
-            }}
-            onHoverEnd={(e) => {
-              e.target.style.borderColor = "rgba(200,160,80,0.3)";
-              e.target.style.background = "transparent";
             }}
           >
-            {" "}
             <svg
               width="16"
               height="16"
               viewBox="0 0 24 24"
               fill="none"
               stroke="#c8a050"
-              strokeWidth="1.8"
+              strokeWidth="2"
               strokeLinecap="round"
             >
-              {" "}
-              <circle cx="11" cy="11" r="7" />{" "}
-              <line x1="16.5" y1="16.5" x2="22" y2="22" />{" "}
-            </svg>{" "}
-          </motion.button>
+              <circle cx="11" cy="11" r="7" />
+              <line x1="16.5" y1="16.5" x2="22" y2="22" />
+            </svg>
+          </button>
 
-          <motion.button
-            whileHover={{ scale: 1.03, background: "rgba(200,160,80,0.18)" }}
-            whileTap={{ scale: 0.97 }}
+          {/* RESERVE BUTTON */}
+          <button
             onClick={() => navigate("/book")}
             style={{
-              background: "rgba(200,160,80,0.1)",
-              border: "1px solid rgba(200,160,80,0.35)",
+              display: window.innerWidth < 768 ? "none" : "block",
+              padding: "10px 18px",
               borderRadius: 8,
-              padding: "9px 20px",
-              fontSize: 11,
-              letterSpacing: "0.16em",
-              textTransform: "uppercase",
+              background: "rgba(200,160,80,0.12)",
+              border: "1px solid rgba(200,160,80,0.25)",
               color: "#c8a050",
               cursor: "pointer",
-              fontFamily: "inherit",
-              transition: "background 0.2s, border 0.2s",
+              letterSpacing: "0.12em",
+              fontSize: 11,
+              textTransform: "uppercase",
             }}
           >
             Reserve
-          </motion.button>
-        </div>
+          </button>
 
-        {/* MOBILE HAMBURGER */}
-        <motion.button
-          className="flex md:hidden"
-          onClick={() => setMobileOpen(!mobileOpen)}
-          style={{
-            background: "none",
-            border: "none",
-            cursor: "pointer",
-            padding: 6,
-            zIndex: 200,
-            flexDirection: "column",
-            gap: 5,
-          }}
-          whileTap={{ scale: 0.9 }}
-        >
-          {[0, 1, 2].map((i) => (
-            <motion.span
-              key={i}
-              animate={
-                mobileOpen
-                  ? i === 1
-                    ? { opacity: 0, scaleX: 0 }
-                    : i === 0
-                      ? { rotate: 45, y: 9 }
-                      : { rotate: -45, y: -9 }
-                  : { rotate: 0, y: 0, opacity: 1, scaleX: 1 }
-              }
-              transition={{ duration: 0.25 }}
+          {/* MOBILE MENU BUTTON */}
+          <button
+            onClick={() => setMobileOpen(true)}
+            style={{
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              display: window.innerWidth >= 1024 ? "none" : "flex",
+              flexDirection: "column",
+              gap: 5,
+              padding: 4,
+            }}
+          >
+            <span
               style={{
-                display: "block",
                 width: 24,
-                height: 1.5,
+                height: 2,
                 background: "#c8a050",
-                borderRadius: 2,
               }}
             />
-          ))}
-        </motion.button>
+            <span
+              style={{
+                width: 24,
+                height: 2,
+                background: "#c8a050",
+              }}
+            />
+            <span
+              style={{
+                width: 24,
+                height: 2,
+                background: "#c8a050",
+              }}
+            />
+          </button>
+        </div>
       </motion.nav>
 
-      {/* MOBILE DRAWER */}
+      {/* MOBILE SIDEBAR */}
       <AnimatePresence>
         {mobileOpen && (
           <>
+            {/* OVERLAY */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -538,166 +342,179 @@ export default function Navbar() {
                 position: "fixed",
                 inset: 0,
                 background: "rgba(0,0,0,0.6)",
-                zIndex: 140,
-                backdropFilter: "blur(4px)",
+                zIndex: 999,
               }}
             />
+
+            {/* SIDEBAR */}
             <motion.div
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
-              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.3 }}
               style={{
                 position: "fixed",
                 top: 0,
                 right: 0,
-                width: "min(360px, 90vw)",
-                height: "100dvh",
-                background: "#0a0804",
-                borderLeft: "1px solid rgba(200,160,80,0.12)",
-                padding: "80px 0 40px",
-                zIndex: 150,
+                width: "88%",
+                maxWidth: 360,
+                height: "100vh",
+                background: "#0b0906",
+                zIndex: 1000,
                 overflowY: "auto",
-                display: "flex",
-                flexDirection: "column",
+                padding: "90px 0 30px",
+                boxShadow: "-10px 0 40px rgba(0,0,0,0.4)",
               }}
             >
-              {/* Mobile Logo accent */}
-              <div
+              {/* CLOSE BUTTON */}
+              <button
+                onClick={() => setMobileOpen(false)}
                 style={{
-                  padding: "0 28px 24px",
-                  borderBottom: "1px solid rgba(200,160,80,0.1)",
+                  position: "absolute",
+                  top: 20,
+                  right: 20,
+                  width: 40,
+                  height: 40,
+                  borderRadius: "50%",
+                  border: "1px solid rgba(200,160,80,0.2)",
+                  background: "transparent",
+                  color: "#c8a050",
+                  fontSize: 22,
+                  cursor: "pointer",
                 }}
               >
-                <div
+                ×
+              </button>
+
+              {/* SEARCH MOBILE */}
+              <div style={{ padding: "0 24px 24px" }}>
+                <button
+                  onClick={() => {
+                    navigate("/search");
+                    setMobileOpen(false);
+                  }}
                   style={{
-                    fontSize: 10,
-                    letterSpacing: "0.3em",
-                    color: "#887a68",
-                    textTransform: "uppercase",
+                    width: "100%",
+                    padding: "14px",
+                    borderRadius: 12,
+                    border: "1px solid rgba(200,160,80,0.18)",
+                    background: "rgba(200,160,80,0.06)",
+                    color: "#f4eee2",
+                    cursor: "pointer",
+                    fontSize: 14,
                   }}
                 >
-                  Fine Dining · Since 2018
-                </div>
+                  Search
+                </button>
               </div>
 
-              {/* Mobile Sections */}
-              <div style={{ flex: 1, padding: "16px 0" }}>
-                {Object.keys(menu).map((section, si) => (
-                  <motion.div
-                    key={section}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: si * 0.06 }}
+              {/* MENU ITEMS */}
+              {Object.keys(menu).map((section) => (
+                <div key={section}>
+                  <button
+                    onClick={() =>
+                      setMobileSection(
+                        mobileSection === section ? null : section
+                      )
+                    }
+                    style={{
+                      width: "100%",
+                      background: "none",
+                      border: "none",
+                      color: "#f3eee2",
+                      padding: "16px 24px",
+                      textAlign: "left",
+                      fontSize: 15,
+                      cursor: "pointer",
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                    }}
                   >
-                    <button
-                      onClick={() =>
-                        setMobileSection(
-                          mobileSection === section ? null : section,
-                        )
-                      }
+                    {section}
+
+                    <span
                       style={{
-                        width: "100%",
-                        background: "none",
-                        border: "none",
-                        padding: "14px 28px",
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                        cursor: "pointer",
-                        color:
-                          mobileSection === section ? "#c8a050" : "#e8dece",
-                        fontSize: 13,
-                        letterSpacing: "0.18em",
-                        textTransform: "uppercase",
-                        fontFamily: "inherit",
-                        transition: "color 0.2s",
+                        transform:
+                          mobileSection === section
+                            ? "rotate(180deg)"
+                            : "rotate(0deg)",
+                        transition: "0.2s",
                       }}
                     >
-                      {section}
-                      <motion.span
-                        animate={{
-                          rotate: mobileSection === section ? 180 : 0,
-                        }}
-                        transition={{ duration: 0.2 }}
-                        style={{ fontSize: 9, opacity: 0.5 }}
-                      >
-                        ▼
-                      </motion.span>
-                    </button>
+                      ▼
+                    </span>
+                  </button>
 
-                    <AnimatePresence>
-                      {mobileSection === section && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.25 }}
-                          style={{
-                            overflow: "hidden",
-                            background: "rgba(200,160,80,0.03)",
-                          }}
-                        >
-                          {menu[section].links.map((item) => (
-                            <Link
-                              key={item.name}
-                              to={item.path}
-                              onClick={() => setMobileOpen(false)}
+                  <AnimatePresence>
+                    {mobileSection === section && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        style={{
+                          overflow: "hidden",
+                        }}
+                      >
+                        {menu[section].links.map((item) => (
+                          <Link
+                            key={item.name}
+                            to={item.path}
+                            onClick={() => setMobileOpen(false)}
+                            style={{
+                              display: "block",
+                              padding: "12px 38px",
+                              textDecoration: "none",
+                              borderBottom:
+                                "1px solid rgba(255,255,255,0.04)",
+                            }}
+                          >
+                            <div
                               style={{
-                                display: "flex",
-                                alignItems: "center",
-                                gap: 12,
-                                padding: "12px 28px 12px 36px",
-                                textDecoration: "none",
-                                borderBottom: "1px solid rgba(200,160,80,0.05)",
+                                color: "#f3eee2",
+                                fontSize: 14,
                               }}
                             >
-                              <span style={{ color: "#c8a050", fontSize: 12 }}>
-                                {item.icon}
-                              </span>
-                              <div>
-                                <div style={{ color: "#f0e8d8", fontSize: 14 }}>
-                                  {item.name}
-                                </div>
-                                <div
-                                  style={{
-                                    color: "#887a68",
-                                    fontSize: 11,
-                                    marginTop: 1,
-                                  }}
-                                >
-                                  {item.desc}
-                                </div>
-                              </div>
-                            </Link>
-                          ))}
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </motion.div>
-                ))}
-              </div>
+                              {item.name}
+                            </div>
 
-              {/* Mobile CTA */}
-              <div style={{ padding: "20px 28px" }}>
+                            <div
+                              style={{
+                                color: "#7f7567",
+                                fontSize: 11,
+                                marginTop: 2,
+                              }}
+                            >
+                              {item.desc}
+                            </div>
+                          </Link>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              ))}
+
+              {/* CTA */}
+              <div style={{ padding: 24 }}>
                 <Link
                   to="/book"
                   onClick={() => setMobileOpen(false)}
                   style={{
                     display: "block",
                     textAlign: "center",
-                    padding: "14px",
+                    padding: "15px",
+                    borderRadius: 12,
                     background: "rgba(200,160,80,0.1)",
-                    border: "1px solid rgba(200,160,80,0.3)",
-                    borderRadius: 10,
+                    border: "1px solid rgba(200,160,80,0.2)",
                     color: "#c8a050",
                     textDecoration: "none",
-                    fontSize: 12,
-                    letterSpacing: "0.2em",
+                    letterSpacing: "0.14em",
                     textTransform: "uppercase",
+                    fontSize: 12,
                   }}
                 >
-                  Reserve a Table
+                  Reserve Table
                 </Link>
               </div>
             </motion.div>
